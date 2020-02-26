@@ -143,6 +143,11 @@ class UnpackedTree
         float cpf_matchedSV[maxEntries_cpf];
         float cpf_matchedMuon[maxEntries_cpf];
         float cpf_matchedElectron[maxEntries_cpf];
+
+        float cpf_track_numberOfValidPixelHits [maxEntries_cpf] ; 
+ 	float cpf_track_pixelLayersWithMeasurement[maxEntries_cpf];
+	float cpf_track_numberOfValidStripHits[maxEntries_cpf];
+        float cpf_track_stripLayersWithMeasurement[maxEntries_cpf];
         
         unsigned int nnpf;
         float npf_ptrel[maxEntries_npf];
@@ -485,6 +490,10 @@ class UnpackedTree
             tree_->Branch("cpf_matchedSV",&cpf_matchedSV,"cpf_matchedSV[ncpf]/F",bufferSize);
             tree_->Branch("cpf_matchedMuon",&cpf_matchedMuon,"cpf_matchedMuon[ncpf]/F",bufferSize);
             tree_->Branch("cpf_matchedElectron",&cpf_matchedElectron,"cpf_matchedElectron[ncpf]/F",bufferSize);
+	    tree_->Branch("cpf_track_numberOfValidPixelHits", &cpf_track_numberOfValidPixelHits , "cpf_track_numberOfValidPixelHits[ncpf]/F", bufferSize) ; 
+	    tree_->Branch("cpf_track_pixelLayersWithMeasurement", &cpf_track_pixelLayersWithMeasurement, " cpf_track_pixelLayersWithMeasurement[ncpf]/F", bufferSize); 
+	    tree_->Branch("cpf_track_numberOfValidStripHits", &cpf_track_numberOfValidStripHits ,"cpf_track_numberOfValidStripHits[ncpf]/F", bufferSize); 
+	    tree_->Branch("cpf_track_stripLayersWithMeasurement", &cpf_track_stripLayersWithMeasurement, "cpf_track_stripLayersWithMeasurement[ncpf]/F", bufferSize);  
             
 
             tree_->Branch("nnpf",&nnpf,"nnpf/I",bufferSize);
@@ -858,6 +867,12 @@ class NanoXTree
         int cpf_matchedSV[maxEntries];
         int cpf_matchedMuon[maxEntries];
         int cpf_matchedElectron[maxEntries];
+	
+    	int cpf_track_numberOfValidPixelHits[maxEntries];
+    	int cpf_track_pixelLayersWithMeasurement[maxEntries];
+    	int cpf_track_numberOfValidStripHits[maxEntries];
+    	int cpf_track_stripLayersWithMeasurement[maxEntries]; 
+        
         
         unsigned int ncsv;
         float csv_trackSumJetEtRatio[maxEntries];
@@ -1282,6 +1297,10 @@ class NanoXTree
             tree_->SetBranchAddress("cpf_matchedSV",&cpf_matchedSV);
             tree_->SetBranchAddress("cpf_matchedMuon",&cpf_matchedMuon);
             tree_->SetBranchAddress("cpf_matchedElectron",&cpf_matchedElectron);
+	    tree_->SetBranchAddress("cpf_track_numberOfValidPixelHits", &cpf_track_numberOfValidPixelHits);
+	    tree_->SetBranchAddress("cpf_track_pixelLayersWithMeasurement", &cpf_track_pixelLayersWithMeasurement) ;
+	    tree_->SetBranchAddress("cpf_track_numberOfValidStripHits" , &cpf_track_numberOfValidStripHits) ;
+ 	    tree_->SetBranchAddress("cpf_track_stripLayersWithMeasurement" , &cpf_track_stripLayersWithMeasurement);
             
           
             tree_->SetBranchAddress("nnpf",&nnpf);
@@ -1919,7 +1938,13 @@ class NanoXTree
                 unpackedTree.cpf_matchedSV[i] = cpf_matchedSV[cpf_offset+i];
                 unpackedTree.cpf_matchedMuon[i] = cpf_matchedMuon[cpf_offset+i];
                 unpackedTree.cpf_matchedElectron[i] = cpf_matchedElectron[cpf_offset+i];
+
+		unpackedTree.cpf_track_numberOfValidPixelHits[i] = cpf_track_numberOfValidPixelHits[cpf_offset+i] ; 
+		unpackedTree.cpf_track_pixelLayersWithMeasurement[i] = cpf_track_pixelLayersWithMeasurement[cpf_offset+i]; 
+		unpackedTree.cpf_track_numberOfValidStripHits[i] = cpf_track_numberOfValidStripHits[cpf_offset+i] ; 
+		unpackedTree.cpf_track_stripLayersWithMeasurement[i] = cpf_track_stripLayersWithMeasurement[cpf_offset+i] ;
             }
+	
             
             
             int npf_offset = 0;
